@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Para Eliana 🎵✨</title>
+  <link rel="stylesheet" href="STYLE.css">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Noto+Sans+JP:wght@300;400;700&family=Dancing+Script:wght@600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Cursor personalizado -->
+  <div class="cursor" id="cursor">♪</div>
+  <div class="cursor-ring" id="cursorRing"></div>
+
+  <!-- Canvas de partículas de fondo -->
+  <canvas class="bg-canvas" id="bgCanvas"></canvas>
+
+  <!-- Grid holográfico de fondo -->
+  <div class="hologram-grid"></div>
+
+  <!-- ===== SECCIÓN 1: PORTADA ===== -->
+  <section class="section section-cover" id="cover">
+
+    <!-- Siluetas decorativas SVG (trenzas Miku + coleta Teto) -->
+    <div class="vocaloid-deco left-deco">
+      <svg viewBox="0 0 120 500" xmlns="http://www.w3.org/2000/svg">
+        <ellipse cx="60" cy="60" rx="28" ry="32" fill="none" stroke="#39c5bb" stroke-width="2" opacity="0.5"/>
+        <line x1="38" y1="85" x2="10" y2="490" stroke="#39c5bb" stroke-width="2.5" stroke-dasharray="10,5" opacity="0.4"/>
+        <line x1="82" y1="85" x2="110" y2="490" stroke="#39c5bb" stroke-width="2.5" stroke-dasharray="10,5" opacity="0.4"/>
+        <circle cx="10" cy="130" r="4" fill="#39c5bb" opacity="0.35"/>
+        <circle cx="110" cy="200" r="3" fill="#39c5bb" opacity="0.3"/>
+        <circle cx="15" cy="300" r="5" fill="#39c5bb" opacity="0.2"/>
+        <text x="45" y="220" font-size="30" fill="#39c5bb" opacity="0.25" font-family="serif">♪</text>
+        <text x="15" y="380" font-size="22" fill="#39c5bb" opacity="0.2" font-family="serif">♫</text>
+      </svg>
+    </div>
+
+    <div class="vocaloid-deco right-deco">
+      <svg viewBox="0 0 120 500" xmlns="http://www.w3.org/2000/svg">
+        <ellipse cx="60" cy="55" rx="25" ry="28" fill="none" stroke="#ff6b6b" stroke-width="2" opacity="0.5"/>
+        <path d="M 60 80 C 95 130 115 180 88 230 C 60 280 28 300 48 360 C 68 420 105 430 100 490"
+              fill="none" stroke="#ff6b6b" stroke-width="2.5" stroke-dasharray="8,4" opacity="0.4"/>
+        <circle cx="100" cy="160" r="4" fill="#ff6b6b" opacity="0.35"/>
+        <circle cx="30" cy="310" r="3" fill="#ff6b6b" opacity="0.3"/>
+        <text x="25" y="210" font-size="26" fill="#ff6b6b" opacity="0.25" font-family="serif">♩</text>
+        <text x="55" y="400" font-size="22" fill="#ff6b6b" opacity="0.2" font-family="serif">♪</text>
+      </svg>
+    </div>
+
+    <!-- Contenido central -->
+    <div class="cover-content">
+      <div class="vocaloid-badge">
+        <span class="badge-miku">初音ミク</span>
+        <span class="badge-sep">×</span>
+        <span class="badge-teto">重音テト</span>
+      </div>
+
+      <p class="cover-eyebrow">— una canción especial para —</p>
+
+      <h1 class="cover-name">
+        <span class="nl" style="--i:0">E</span><span class="nl" style="--i:1">l</span><span class="nl" style="--i:2">i</span><span class="nl" style="--i:3">a</span><span class="nl" style="--i:4">n</span><span class="nl" style="--i:5">a</span>
+      </h1>
+
+      <div class="holo-bar"><div class="holo-bar-fill"></div></div>
+
+      <p class="cover-tagline">
+        <span class="miku-color">♪</span> こんにちは、愛しい人 <span class="teto-color">♪</span>
+      </p>
+      <p class="cover-tagline-es">Hola, mi vida</p>
+
+      <button class="btn-start" onclick="startJourney()">
+        <span class="btn-icon">▶</span>
+        <span class="btn-text">再生する · Reproducir</span>
+        <div class="btn-glow"></div>
+      </button>
+    </div>
+
+    <div class="cover-particles" id="coverParticles"></div>
+    <div class="scanlines"></div>
+  </section>
+
+  <!-- ===== SECCIÓN 2: TRACK 01 ===== -->
+  <section class="section section-story" id="story1" data-reveal>
+    <div class="track-label">
+      <span class="track-num miku-color">TRACK 01</span>
+      <span class="track-sep">────</span>
+      <span class="track-title">El primer encuentro · 最初の出会い</span>
+    </div>
+    <div class="story-layout">
+      <div class="photo-frame-vk miku-frame" id="photoFrame1">
+        <div class="pf-corner tl"></div><div class="pf-corner tr"></div>
+        <div class="pf-corner bl"></div><div class="pf-corner br"></div>
+        <div class="photo-inner" id="photo1">
+          <input type="file" accept="image/*" onchange="loadPhoto(this,'photo1')" class="photo-input">
+          <div class="ph-placeholder">
+            <span class="ph-icon miku-color">🎵</span>
+            <p>Toca para añadir<br><em class="ph-jp miku-color">写真を追加</em></p>
+          </div>
+        </div>
+        <div class="ph-scan miku-scan"></div>
+        <div class="ph-tag miku-bg">PHOTO_01.jpg</div>
+      </div>
+
+      <div class="story-text-vk">
+        <div class="sec-id miku-color">[ 01 ]</div>
+        <h2 class="story-h miku-color">El día que<br>todo cambió...</h2>
+        <p class="story-p">
+          no se como llegastes a mi vida pero conocerte fue lo mejor de 
+          de la vida ya que me cambiastes por completo y me ayudastes
+          a superar mi anciedad socal y mi inseguridades.
+
+          TE AMO
+        </p>
+        <div class="eq miku-eq">
+          <span></span><span></span><span></span><span></span>
+          <span></span><span></span><span></span><span></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SECCIÓN 3: CITA CENTRAL ===== -->
+  <section class="section section-quote" id="quoteSection" data-reveal>
+    <div class="quote-bg-word">LOVE</div>
+    <div class="quote-wrap">
+      <div class="quote-deco-row">
+        <span class="miku-color">♪</span>
+        <div class="qdeco-line miku-border"></div>
+        <span class="teto-color">♪</span>
+        <div class="qdeco-line teto-border"></div>
+        <span class="miku-color">♪</span>
+      </div>
+      <p class="main-quote">
+        <span class="ql">eres el amor de mi vida</span>
+        <span class="ql accent">y siempre te querré</span>
+        <span class="ql">cada día más y mas</span>
+      </p>
+      <p class="quote-jp">あなたは私の人生の愛です</p>
+      <div class="duo-hearts">
+        <span class="miku-color">初音</span>
+        <span class="hearts-emoji">💙❤️</span>
+        <span class="teto-color">重音</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SECCIÓN 4: TRACK 02 ===== -->
+  <section class="section section-story s-alt" id="story2" data-reveal>
+    <div class="track-label">
+      <span class="track-num teto-color">TRACK 02</span>
+      <span class="track-sep">────</span>
+      <span class="track-title">Nuestras vidas · 瞬間</span>
+    </div>
+    <div class="story-layout reverse">
+      <div class="story-text-vk">
+        <div class="sec-id teto-color">[ 02 ]</div>
+        <h2 class="story-h teto-color">Tiempo<br>compartido...</h2>
+        <p class="story-p">
+          Cuando comenzamos juntos me tocastes el corazon con tu voz
+          y esa forma de ser tuya que tanto me gusta, ambos nos
+          complementamos mutuamente y me enselastes lo divertido que
+          es estar contigo, el tiempo hizo que mis sentimientos por ti
+          sean aun mayor.
+        </p>
+        <div class="eq teto-eq">
+          <span></span><span></span><span></span><span></span>
+          <span></span><span></span><span></span><span></span>
+        </div>
+      </div>
+
+      <div class="photo-frame-vk teto-frame" id="photoFrame2">
+        <div class="pf-corner tl"></div><div class="pf-corner tr"></div>
+        <div class="pf-corner bl"></div><div class="pf-corner br"></div>
+        <div class="photo-inner" id="photo2">
+          <input type="file" accept="image/*" onchange="loadPhoto(this,'photo2')" class="photo-input">
+          <div class="ph-placeholder">
+            <span class="ph-icon teto-color">🎶</span>
+            <p>Toca para añadir<br><em class="ph-jp teto-color">写真を追加</em></p>
+          </div>
+        </div>
+        <div class="ph-scan teto-scan"></div>
+        <div class="ph-tag teto-bg">PHOTO_02.jpg</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SECCIÓN 5: TRACK 03 ===== -->
+  <section class="section section-story" id="story3" data-reveal>
+    <div class="track-label">
+      <span class="track-num miku-color">TRACK 03</span>
+      <span class="track-sep">────</span>
+      <span class="track-title">Para siempre · 永遠に</span>
+    </div>
+    <div class="story-layout">
+      <div class="photo-frame-vk miku-frame" id="photoFrame3">
+        <div class="pf-corner tl"></div><div class="pf-corner tr"></div>
+        <div class="pf-corner bl"></div><div class="pf-corner br"></div>
+        <div class="photo-inner" id="photo3">
+          <input type="file" accept="image/*" onchange="loadPhoto(this,'photo3')" class="photo-input">
+          <div class="ph-placeholder">
+            <span class="ph-icon miku-color">💙</span>
+            <p>Una más de nosotros<br><em class="ph-jp miku-color">一緒に 💑</em></p>
+          </div>
+        </div>
+        <div class="ph-scan miku-scan"></div>
+        <div class="ph-tag miku-bg">PHOTO_03.jpg</div>
+      </div>
+
+      <div class="story-text-vk">
+        <div class="sec-id miku-color">[ 03 ]</div>
+        <h2 class="story-h miku-color">Y siempre...</h2>
+        <p class="story-p">
+          Prometo estar aquí en las buenas y en las malas, 
+          por que estar 1h hora contigo equivaldria a 100 horas con 
+          cualquiera por eso con toda seguridad te digo que Contigo
+          aprendí que el amor es la canción más bonita que existe, Eliana.
+        </p>
+        <div class="eq miku-eq">
+          <span></span><span></span><span></span><span></span>
+          <span></span><span></span><span></span><span></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SECCIÓN FINAL ===== -->
+  <section class="section section-final" id="final" data-reveal>
+    <div class="glitch-text" data-text="TE AMO">TE AMO</div>
+    <p class="final-jp">愛してる、エリアナ</p>
+    <h2 class="final-name">Eliana</h2>
+    <p class="final-sub">con todo lo que soy · ずっと君のもの</p>
+
+    <div class="final-duo">
+      <div class="duo-card miku-card">
+        <div class="dc-glyph">ミク</div>
+        <div class="dc-name">初音ミク</div>
+        <div class="dc-sub">Hatsune Miku</div>
+        <div class="dc-msg">siempre juntos</div>
+      </div>
+      <div class="duo-sep">
+        <div class="ds-hearts">💙<br>❤️</div>
+        <div class="ds-line"></div>
+      </div>
+      <div class="duo-card teto-card">
+        <div class="dc-glyph">テト</div>
+        <div class="dc-name">重音テト</div>
+        <div class="dc-sub">Kasane Teto</div>
+        <div class="dc-msg">para siempre</div>
+      </div>
+    </div>
+
+    <p class="final-sign">— tuyo para siempre · 永遠に君のもの 🎵</p>
+    <div class="scanlines"></div>
+  </section>
+
+  <!-- ===== BOTÓN EXPORTAR ===== -->
+  <div class="export-wrapper">
+    <button id="exportBtn" class="export-btn" onclick="exportCarta()">
+      💾 Sube tus fotos primero
+    </button>
+    <div class="export-tip">← Sube las fotos y luego toca aquí para descargar la carta lista</div>
+  </div>
+
+  <!-- ===== REPRODUCTOR ===== -->
+  <div class="music-player-vk" id="musicPlayer">
+    <div class="mp-led"></div>
+    <div class="mp-info">
+      <span class="mp-title">♪ Nuestra canción</span>
+      <div class="mp-bars" id="mpBars">
+        <span></span><span></span><span></span><span></span><span></span><span></span>
+      </div>
+    </div>
+    <button class="mp-btn" id="musicToggle" onclick="toggleMusic()">▶</button>
+    <div id="yt-player" style="position:absolute;opacity:0;pointer-events:none;width:1px;height:1px;bottom:0;right:0;"></div>
+  </div>
+
+  <script src="https://www.youtube.com/iframe_api"></script>
+  <script src="SCRIPT.js"></script>
+</body>
+</html>
